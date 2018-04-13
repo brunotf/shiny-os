@@ -16,17 +16,19 @@ public class PingVisao implements ActionListener {
 	private JButton btnAdaptador = new JButton("Mostrar adaptadores Ethernet");
 	private JButton btnPing = new JButton("Mostrar média do ping com uma URL");
 	private JTextField txtURL;
+	
 
 	private PingControl pc = new PingControl();
 
 	public PingVisao() {
 		JFrame janela = new JFrame("Testa Ping");
 		JPanel painelPrincipal = new JPanel(new BorderLayout());
-		
+		JPanel painelPing = new JPanel(new BorderLayout());
+				
 		janela.setContentPane(painelPrincipal);
 		
 		JPanel painelBotoes = new JPanel();
-		
+				
 		janela.setContentPane( painelPrincipal ); 
 
 		
@@ -40,8 +42,8 @@ public class PingVisao implements ActionListener {
 		
 		janela.setContentPane(painelPrincipal);
 		janela.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		janela.setSize(640, 480);
 		janela.setVisible(true);
+		janela.setSize(640, 480);
 		
 	}
 	
@@ -54,8 +56,8 @@ public class PingVisao implements ActionListener {
 		String cmd = e.getActionCommand();
 		if ("Mostrar adaptadores Ethernet".contains( cmd )) {
 			pc.getAdaptador();
+		} else if ("Mostrar média do ping com uma URL".contains(cmd)) {
 		}
-		
 	}
 
 }
