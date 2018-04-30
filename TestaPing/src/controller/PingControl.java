@@ -10,14 +10,19 @@ public class PingControl {
 
 	public String getAdaptador() {
 		String os = System.getProperty("os.name");
+
 		String ipv4 = "";
 
 		if ("Windows".contains(os)) {
 			try {
 				Process proc = Runtime.getRuntime().exec("ipconfig /all ");
+
 				InputStream fluxo = proc.getInputStream();
+
 				InputStreamReader leFluxo = new InputStreamReader(fluxo);
+
 				BufferedReader buffer = new BufferedReader(leFluxo);
+
 				String linha = buffer.readLine();
 
 				while (linha != null) {
@@ -30,7 +35,7 @@ public class PingControl {
 				}
 				return ipv4;
 			} catch (IOException e) {
-				e.getMessage();
+				e.printStackTrace(System.err);
 			}
 		} else if ("Linux".contains(os)) {
 
@@ -42,24 +47,31 @@ public class PingControl {
 
 	public void getPing(String url) {
 		String os = System.getProperty("os.name");
+
+		String media = "";
+
 		if ("Windows".contains(os)) {
-			String media = "";
 			try {
 				Process proc = Runtime.getRuntime().exec("ping " + url + " -n 10 ");
+
 				InputStream fluxo = proc.getInputStream();
+
 				InputStreamReader leFluxo = new InputStreamReader(fluxo);
+
 				BufferedReader buffer = new BufferedReader(leFluxo);
+
 				String linha = buffer.readLine();
+
 				while (linha != null) {
-					if (linha.contains("dia"))
+					if (linha.contains("dia")) {
 						media = linha.substring(42);
+					}
 					linha = buffer.readLine();
 				}
 
 			} catch (IOException e) {
-				e.getMessage();
+				e.printStackTrace(System.err);
 			}
-			JOptionPane.showMessageDialog(null, "Ping médio para o host: " + media);
 		}
 	}
 }

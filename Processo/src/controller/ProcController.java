@@ -8,7 +8,9 @@ public class ProcController {
 
     public void propriedades() {
         Properties prop = System.getProperties();
+        
         Set<Object> lista = prop.keySet();
+        
         for (Object key : lista) {
             System.out.print(key);
             System.out.print(" : ");
@@ -23,20 +25,23 @@ public class ProcController {
     }
 
     public void lerProcesso(String caminho) {
-
         try {
             Process proc = Runtime.getRuntime().exec(caminho);
+            
             InputStream fluxo = proc.getInputStream();
+            
             InputStreamReader leFluxo = new InputStreamReader(fluxo);
+            
             BufferedReader buffer = new BufferedReader(leFluxo);
+            
             String linha = buffer.readLine();
+            
             while (linha != null) {
                 System.out.println(linha);
                 linha = buffer.readLine();
             }
         } catch (Exception e) {
-            // TODO Auto-generated catch block
-            e.printStackTrace();
+            e.printStackTrace(System.err);
         }
     }
 
@@ -64,9 +69,13 @@ public class ProcController {
 
     public void mataProcesso(String processo) {
         String cmdNome = "taskkill /im ";
+        
         String cmdPid = "taskkill /pid ";
+        
         int pid = 0;
+        
         StringBuffer buffer = new StringBuffer();
+        
         try {
             pid = Integer.parseInt(processo);
             buffer.append(cmdPid);

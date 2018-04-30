@@ -7,10 +7,10 @@ public class BilheteriaVisao {
 
 	public static void main(String[] args) {
 		int permissoes = 300;
+
 		Semaphore semaforo = new Semaphore(permissoes);
-		
-		for (int i = 0; i < 300; i++){
-			
+
+		for (int i = 0; i < 300; i++) {
 			Thread t = new BilheteriaControl(i, semaforo);
 			t.start();
 		}
